@@ -1,0 +1,23 @@
+Should be in a ini file:
+
+WHICH RUNTIMES ARE AVAILABLE/ORDER/I DUNNO?!  OR JUST FLASH? - Just flash for now but I'll leave the other stuff available
+
+I'm assuming that it only makes sense to have one runtime but I'll keep it so that multiple runtimes can be used -really what should be done is that the runtime should be set to the first one that comes back from javascript as available.  Hmmm, what would be the best way of doing that, hmmm.
+
+Maybe there should be a filesystem free space check before upload too at some point.
+
+widget.tpl
+resize (true/false) width/height/quality - AIN'T WORKING.  Not sure why.  Don't think we need it anyway.
+
+Error handling - at this point if anything fails it isn't handled at all the flash just happily reports that everything has been uploaded 100%  There just is NO feedback at all.  You even have to reload the page to get the flash object back in a state where it can be used for more uploads.  Not sure how to fix that.
+
+Setting unique_names to false means that the original file name is available but that if someone else uploads a file at the same time with the same name it will screw up.  Or, in the event of multiple retries with the same name.  I should set this up in the php so it is unique.  Or set it in the flash/javascript as a get variable orig_filename or something.  The generated page shows that those variables are there - they just don't ever get to upload.php.
+
+This is meant for uploading large movie files... but how should we really do that?:
+
+	1.) Should it be calling the ezflvvideo extension (or something else) as a handler from the php code and creating the object from the compressed output instead of the large file uploaded?
+	2.) Or should I just incorporate the compressing code into this (or the other way around)?
+	3.) Or maybe this should be like webdav where the file is dumped in a directory and the object is created by a cronjob from ezflv.
+	4.) Or if it's not a movie but a bunch of images/docs then it should just be like multiupload and create the objects on the fly 
+	5.) Or it could have a user-defined handler per extension.
+	6.) Should this be a widget template that can be included in a datatype template.
